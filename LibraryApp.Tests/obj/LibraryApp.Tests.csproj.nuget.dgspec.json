@@ -10,7 +10,7 @@
         "projectUniqueName": "/home/runner/work/aoop-assignment2/aoop-assignment2/LibraryApp.Tests/LibraryApp.Tests.csproj",
         "projectName": "LibraryApp.Tests",
         "projectPath": "/home/runner/work/aoop-assignment2/aoop-assignment2/LibraryApp.Tests/LibraryApp.Tests.csproj",
-        "packagesPath": "/tmp/codeql-scratch-e57f6e02ac11cdf3/dbs/csharp/working/packages",
+        "packagesPath": "/home/runner/.nuget/packages/",
         "outputPath": "/home/runner/work/aoop-assignment2/aoop-assignment2/LibraryApp.Tests/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
@@ -115,7 +115,7 @@
         "projectUniqueName": "/home/runner/work/aoop-assignment2/aoop-assignment2/LibraryApp/LibraryApp.csproj",
         "projectName": "LibraryApp",
         "projectPath": "/home/runner/work/aoop-assignment2/aoop-assignment2/LibraryApp/LibraryApp.csproj",
-        "packagesPath": "/tmp/codeql-scratch-e57f6e02ac11cdf3/dbs/csharp/working/packages",
+        "packagesPath": "/home/runner/.nuget/packages/",
         "outputPath": "/home/runner/work/aoop-assignment2/aoop-assignment2/LibraryApp/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [

@@ -23,7 +23,11 @@ public class DataService : IDataService
             var json = File.ReadAllText(_filePath);
             return JsonSerializer.Deserialize<AppData>(json) ?? CreateDefaultData();
         }
-        catch
+        catch (JsonException)
+        {
+            return CreateDefaultData();
+        }
+        catch (IOException)
         {
             return CreateDefaultData();
         }

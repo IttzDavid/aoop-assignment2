@@ -76,7 +76,11 @@ public partial class LibrarianViewModel : ViewModelBase
     private void AddBook()
     {
         CatalogMessage = string.Empty;
-        if (string.IsNullOrWhiteSpace(EditTitle)) { CatalogMessage = "Title is required."; return; }
+        if (string.IsNullOrWhiteSpace(EditTitle))
+        {
+            CatalogMessage = "Title is required.";
+            return;
+        }
         var book = new Book
         {
             Title = EditTitle.Trim(),
