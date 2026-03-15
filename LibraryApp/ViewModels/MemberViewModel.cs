@@ -56,7 +56,11 @@ public partial class MemberViewModel : ViewModelBase
     private void BorrowBook()
     {
         CatalogMessage = string.Empty;
-        if (SelectedCatalogBook == null) return;
+        if (SelectedCatalogBook == null)
+        {
+            CatalogMessage = "Please select a book to borrow.";
+            return;
+        }
         var success = _libraryService.BorrowBook(SelectedCatalogBook.Id, _member);
         if (success)
         {
@@ -75,7 +79,11 @@ public partial class MemberViewModel : ViewModelBase
     private void ReturnBook()
     {
         LoansMessage = string.Empty;
-        if (SelectedBorrowedBook == null) return;
+        if (SelectedBorrowedBook == null)
+        {
+            LoansMessage = "Please select a book to return.";
+            return;
+        }
         var bookTitle = SelectedBorrowedBook.Title;
         var success = _libraryService.ReturnBook(SelectedBorrowedBook.Id, _member);
         if (success)
