@@ -25,7 +25,8 @@ public class LibraryService : ILibraryService
         if (book == null || !book.IsAvailable) return false;
 
         book.IsAvailable = false;
-        member.BorrowedBookIds.Add(bookId);
+        if (!member.BorrowedBookIds.Contains(bookId))
+            member.BorrowedBookIds.Add(bookId);
         _data.ActiveLoans.Add(new Loan
         {
             BookId = bookId,
@@ -64,8 +65,14 @@ public class LibraryService : ILibraryService
 
     public void UpdateBook(Book book)
     {
-        var idx = _data.Books.FindIndex(b => b.Id == book.Id);
-        if (idx >= 0) _data.Books[idx] = book;
+        var existing = _data.Books.FirstOrDefault(b => b.Id == book.Id);
+        if (existing == null) return;
+        existing.Title = book.Title;
+        existing.Author = book.Author;
+        existing.ISBN = book.ISBN;
+        existing.Description = book.Description;
+        existing.IsAvailable = book.IsAvailable;
+        existing.Ratings = book.Ratings;
     }
 
     public void DeleteBook(string bookId)
