@@ -19,11 +19,11 @@ public class UITests
             },
             Members = new List<Member>
             {
-                new() { Id = "member1", Username = "alice", Password = "password123", Name = "Alice Smith" },
+                new() { Id = "member1", Username = "alice", Password = PasswordHelper.Hash("password123"), Name = "Alice Smith" },
             },
             Librarians = new List<Librarian>
             {
-                new() { Id = "lib1", Username = "librarian", Password = "libpass", Name = "Carol Williams" },
+                new() { Id = "lib1", Username = "librarian", Password = PasswordHelper.Hash("libpass"), Name = "Carol Williams" },
             },
             ActiveLoans = new List<Loan>()
         };
@@ -77,12 +77,10 @@ public class UITests
     {
         var (authService, libraryService) = CreateServices();
 
-        // Member borrows a book first
         var (_, memberUser) = authService.Login("alice", "password123");
         var member = (Member)memberUser!;
         libraryService.BorrowBook("book1", member);
 
-        // Librarian views active loans
         var (libRole, libUser) = authService.Login("librarian", "libpass");
         var librarian = (Librarian)libUser!;
         var libVm = new LibrarianViewModel(librarian, libraryService);

@@ -16,11 +16,11 @@ public class UnitTests
         },
         Members = new List<Member>
         {
-            new() { Id = "member1", Username = "alice", Password = "password123", Name = "Alice Smith" },
+            new() { Id = "member1", Username = "alice", Password = PasswordHelper.Hash("password123"), Name = "Alice Smith" },
         },
         Librarians = new List<Librarian>
         {
-            new() { Id = "lib1", Username = "librarian", Password = "libpass", Name = "Carol Williams" },
+            new() { Id = "lib1", Username = "librarian", Password = PasswordHelper.Hash("libpass"), Name = "Carol Williams" },
         },
         ActiveLoans = new List<Loan>()
     };
@@ -127,5 +127,20 @@ public class UnitTests
 
         Assert.Single(data.Books);
         Assert.DoesNotContain(data.Books, b => b.Id == "book1");
+    }
+
+    [Fact]
+    public void DeleteBook_CleansUpMemberBorrowedIds()
+    {
+        var data = CreateTestData();
+        var service = new LibraryService(new InMemoryDataService(data), data);
+        var member = data.Members[0];
+        service.BorrowBook("book1", member);
+        Assert.Contains("book1", member.BorrowedBookIds);
+
+        service.DeleteBook("book1");
+
+        Assert.DoesNotContain("book1", member.BorrowedBookIds);
+        Assert.Empty(data.ActiveLoans);
     }
 }

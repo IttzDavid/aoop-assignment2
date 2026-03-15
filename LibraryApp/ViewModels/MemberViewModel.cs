@@ -55,6 +55,7 @@ public partial class MemberViewModel : ViewModelBase
     [RelayCommand]
     private void BorrowBook()
     {
+        CatalogMessage = string.Empty;
         if (SelectedCatalogBook == null) return;
         var success = _libraryService.BorrowBook(SelectedCatalogBook.Id, _member);
         if (success)
@@ -73,6 +74,7 @@ public partial class MemberViewModel : ViewModelBase
     [RelayCommand]
     private void ReturnBook()
     {
+        LoansMessage = string.Empty;
         if (SelectedBorrowedBook == null) return;
         var bookTitle = SelectedBorrowedBook.Title;
         var success = _libraryService.ReturnBook(SelectedBorrowedBook.Id, _member);

@@ -72,6 +72,8 @@ public class LibraryService : ILibraryService
     {
         _data.Books.RemoveAll(b => b.Id == bookId);
         _data.ActiveLoans.RemoveAll(l => l.BookId == bookId);
+        foreach (var member in _data.Members)
+            member.BorrowedBookIds.Remove(bookId);
     }
 
     public void Save() => _dataService.Save(_data);

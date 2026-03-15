@@ -75,6 +75,7 @@ public partial class LibrarianViewModel : ViewModelBase
     [RelayCommand]
     private void AddBook()
     {
+        CatalogMessage = string.Empty;
         if (string.IsNullOrWhiteSpace(EditTitle)) { CatalogMessage = "Title is required."; return; }
         var book = new Book
         {
@@ -94,6 +95,7 @@ public partial class LibrarianViewModel : ViewModelBase
     [RelayCommand]
     private void SaveBook()
     {
+        CatalogMessage = string.Empty;
         if (SelectedBook == null || string.IsNullOrWhiteSpace(EditTitle)) return;
         SelectedBook.Title = EditTitle.Trim();
         SelectedBook.Author = EditAuthor.Trim();
@@ -108,6 +110,7 @@ public partial class LibrarianViewModel : ViewModelBase
     [RelayCommand]
     private void DeleteBook()
     {
+        CatalogMessage = string.Empty;
         if (SelectedBook == null) return;
         var title = SelectedBook.Title;
         _libraryService.DeleteBook(SelectedBook.Id);

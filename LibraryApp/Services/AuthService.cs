@@ -18,10 +18,11 @@ public class AuthService : IAuthService
     public (UserRole Role, object? User) Login(string username, string password)
     {
         _data = _dataService.Load();
-        var member = _data.Members.Find(m => m.Username == username && m.Password == password);
+        var hashed = PasswordHelper.Hash(password);
+        var member = _data.Members.Find(m => m.Username == username && m.Password == hashed);
         if (member != null) return (UserRole.Member, member);
 
-        var librarian = _data.Librarians.Find(l => l.Username == username && l.Password == password);
+        var librarian = _data.Librarians.Find(l => l.Username == username && l.Password == hashed);
         if (librarian != null) return (UserRole.Librarian, librarian);
 
         return (UserRole.None, null);

@@ -50,12 +50,12 @@ public class DataService : IDataService
             },
             Members = new System.Collections.Generic.List<Member>
             {
-                new() { Id = "member1", Username = "alice", Password = "password123", Name = "Alice Smith" },
-                new() { Id = "member2", Username = "bob", Password = "password456", Name = "Bob Johnson" },
+                new() { Id = "member1", Username = "alice", Password = PasswordHelper.Hash("password123"), Name = "Alice Smith" },
+                new() { Id = "member2", Username = "bob", Password = PasswordHelper.Hash("password456"), Name = "Bob Johnson" },
             },
             Librarians = new System.Collections.Generic.List<Librarian>
             {
-                new() { Id = "lib1", Username = "librarian", Password = "libpass", Name = "Carol Williams" },
+                new() { Id = "lib1", Username = "librarian", Password = PasswordHelper.Hash("libpass"), Name = "Carol Williams" },
             },
             ActiveLoans = new System.Collections.Generic.List<Loan>()
         };
