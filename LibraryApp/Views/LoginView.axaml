@@ -1,0 +1,13 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:LibraryApp.ViewModels"
+             x:Class="LibraryApp.Views.LoginView"
+             x:DataType="vm:LoginViewModel">
+  <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="16" Width="300">
+    <TextBlock Text="Library Management System" FontSize="22" FontWeight="Bold" HorizontalAlignment="Center"/>
+    <TextBox Text="{Binding Username}" Watermark="Username"/>
+    <TextBox Text="{Binding Password}" Watermark="Password" PasswordChar="*"/>
+    <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" IsVisible="{Binding ErrorMessage, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>
+    <Button Content="Login" Command="{Binding LoginCommand}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
+  </StackPanel>
+</UserControl>

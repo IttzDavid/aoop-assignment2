@@ -1,0 +1,23 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:LibraryApp.ViewModels"
+             xmlns:views="using:LibraryApp.Views"
+             x:Class="LibraryApp.App"
+             RequestedThemeVariant="Default">
+
+    <Application.DataTemplates>
+        <DataTemplate DataType="{x:Type vm:LoginViewModel}">
+            <views:LoginView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:MemberViewModel}">
+            <views:MemberView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:LibrarianViewModel}">
+            <views:LibrarianView/>
+        </DataTemplate>
+    </Application.DataTemplates>
+
+    <Application.Styles>
+        <FluentTheme />
+    </Application.Styles>
+</Application>

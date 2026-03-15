@@ -1,0 +1,53 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:LibraryApp.ViewModels"
+             x:Class="LibraryApp.Views.MemberView"
+             x:DataType="vm:MemberViewModel">
+  <DockPanel>
+    <Border DockPanel.Dock="Top" Background="#2196F3" Padding="16,8">
+      <TextBlock Text="{Binding MemberName, StringFormat='Welcome, {0}!'}" Foreground="White" FontSize="16"/>
+    </Border>
+    <TabControl>
+      <TabItem Header="Library Catalog">
+        <DockPanel Margin="8">
+          <StackPanel DockPanel.Dock="Top" Spacing="8" Margin="0,0,0,8">
+            <TextBox Text="{Binding CatalogSearchText}" Watermark="Search by title or author..."/>
+            <TextBlock Text="{Binding CatalogMessage}" Foreground="Green" IsVisible="{Binding CatalogMessage, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>
+          </StackPanel>
+          <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Spacing="8" Margin="0,8,0,0">
+            <Button Content="Borrow Selected" Command="{Binding BorrowBookCommand}"/>
+          </StackPanel>
+          <ListBox ItemsSource="{Binding CatalogBooks}" SelectedItem="{Binding SelectedCatalogBook}">
+            <ListBox.ItemTemplate>
+              <DataTemplate>
+                <StackPanel Spacing="2">
+                  <TextBlock Text="{Binding Title}" FontWeight="Bold"/>
+                  <TextBlock Text="{Binding Author}" Foreground="Gray"/>
+                  <TextBlock Text="{Binding ISBN}" FontSize="11" Foreground="LightGray"/>
+                </StackPanel>
+              </DataTemplate>
+            </ListBox.ItemTemplate>
+          </ListBox>
+        </DockPanel>
+      </TabItem>
+      <TabItem Header="My Loans">
+        <DockPanel Margin="8">
+          <TextBlock DockPanel.Dock="Top" Text="{Binding LoansMessage}" Foreground="Green" IsVisible="{Binding LoansMessage, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" Margin="0,0,0,8"/>
+          <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Spacing="8" Margin="0,8,0,0">
+            <Button Content="Return Selected" Command="{Binding ReturnBookCommand}"/>
+          </StackPanel>
+          <ListBox ItemsSource="{Binding BorrowedBooks}" SelectedItem="{Binding SelectedBorrowedBook}">
+            <ListBox.ItemTemplate>
+              <DataTemplate>
+                <StackPanel Spacing="2">
+                  <TextBlock Text="{Binding Title}" FontWeight="Bold"/>
+                  <TextBlock Text="{Binding Author}" Foreground="Gray"/>
+                </StackPanel>
+              </DataTemplate>
+            </ListBox.ItemTemplate>
+          </ListBox>
+        </DockPanel>
+      </TabItem>
+    </TabControl>
+  </DockPanel>
+</UserControl>

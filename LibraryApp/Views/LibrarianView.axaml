@@ -1,0 +1,63 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:LibraryApp.ViewModels"
+             x:Class="LibraryApp.Views.LibrarianView"
+             x:DataType="vm:LibrarianViewModel">
+  <DockPanel>
+    <Border DockPanel.Dock="Top" Background="#4CAF50" Padding="16,8">
+      <TextBlock Text="{Binding LibrarianName, StringFormat='Librarian: {0}'}" Foreground="White" FontSize="16"/>
+    </Border>
+    <TabControl>
+      <TabItem Header="Manage Books">
+        <Grid ColumnDefinitions="*,300" Margin="8">
+          <DockPanel Grid.Column="0" Margin="0,0,8,0">
+            <StackPanel DockPanel.Dock="Top" Spacing="4" Margin="0,0,0,8">
+              <TextBox Text="{Binding CatalogSearchText}" Watermark="Search books..."/>
+              <TextBlock Text="{Binding CatalogMessage}" Foreground="Green" IsVisible="{Binding CatalogMessage, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>
+            </StackPanel>
+            <ListBox ItemsSource="{Binding AllBooks}" SelectedItem="{Binding SelectedBook}">
+              <ListBox.ItemTemplate>
+                <DataTemplate>
+                  <StackPanel Spacing="2">
+                    <TextBlock Text="{Binding Title}" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding Author}" Foreground="Gray"/>
+                    <TextBlock Text="{Binding IsAvailable, StringFormat='Available: {0}'}" FontSize="11"/>
+                  </StackPanel>
+                </DataTemplate>
+              </ListBox.ItemTemplate>
+            </ListBox>
+          </DockPanel>
+          <StackPanel Grid.Column="1" Spacing="8">
+            <TextBlock Text="Book Details" FontWeight="Bold" FontSize="14"/>
+            <TextBox Text="{Binding EditTitle}" Watermark="Title *"/>
+            <TextBox Text="{Binding EditAuthor}" Watermark="Author"/>
+            <TextBox Text="{Binding EditIsbn}" Watermark="ISBN"/>
+            <TextBox Text="{Binding EditDescription}" Watermark="Description" AcceptsReturn="True" Height="80"/>
+            <StackPanel Orientation="Horizontal" Spacing="8">
+              <Button Content="Add New" Command="{Binding AddBookCommand}"/>
+              <Button Content="Save" Command="{Binding SaveBookCommand}" IsVisible="{Binding IsEditing}"/>
+              <Button Content="Delete" Command="{Binding DeleteBookCommand}" IsVisible="{Binding IsEditing}" Foreground="Red"/>
+            </StackPanel>
+            <Button Content="Clear Form" Command="{Binding NewBookCommand}"/>
+          </StackPanel>
+        </Grid>
+      </TabItem>
+      <TabItem Header="Active Loans">
+        <DockPanel Margin="8">
+          <TextBlock DockPanel.Dock="Top" Text="{Binding TotalActiveLoans, StringFormat='Total Active Loans: {0}'}" FontWeight="Bold" Margin="0,0,0,8"/>
+          <ListBox ItemsSource="{Binding ActiveLoans}">
+            <ListBox.ItemTemplate>
+              <DataTemplate>
+                <StackPanel Spacing="2">
+                  <TextBlock Text="{Binding BookTitle}" FontWeight="Bold"/>
+                  <TextBlock Text="{Binding MemberName}" Foreground="Gray"/>
+                  <TextBlock Text="{Binding BorrowDate, StringFormat='Borrowed: {0:d}'}" FontSize="11"/>
+                </StackPanel>
+              </DataTemplate>
+            </ListBox.ItemTemplate>
+          </ListBox>
+        </DockPanel>
+      </TabItem>
+    </TabControl>
+  </DockPanel>
+</UserControl>
