@@ -35,14 +35,9 @@ public class DataService : IDataService
 
     public void Save(AppData data)
     {
-        try
-        {
-            var options = new JsonSerializerOptions { WriteIndented = true };
-            var json = JsonSerializer.Serialize(data, options);
-            File.WriteAllText(_filePath, json);
-        }
-        catch (IOException) { }
-        catch (UnauthorizedAccessException) { }
+        var options = new JsonSerializerOptions { WriteIndented = true };
+        var json = JsonSerializer.Serialize(data, options);
+        File.WriteAllText(_filePath, json);
     }
 
     private static AppData CreateDefaultData()

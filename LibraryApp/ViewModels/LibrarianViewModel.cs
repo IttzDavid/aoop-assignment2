@@ -128,8 +128,7 @@ public partial class LibrarianViewModel : ViewModelBase
     [RelayCommand]
     private void NewBook()
     {
-        SelectedBook = null;
-        ClearForm();
+        SelectedBook = null; // triggers OnSelectedBookChanged → ClearForm()
         IsEditing = false;
     }
 
